@@ -1,0 +1,32 @@
+<div class="jumbotron text-center">
+  <h1>Welcome to Digg Scraper</h1>
+
+  <p>See articles from Digg and make comments</p>
+</div>
+
+<div class="container">
+
+	{{#each entry}}
+		<div class="row">
+
+
+			<div class="media col-xs-12">
+  				<div class="media-left media-middle">
+    				<a href="{{this.link}}" target="_blank">
+      					<img class="media-object img img-thumbnail" src="{{this.image}}" alt="news thumbnail">
+    				</a>
+  				</div>
+  				<div class="media-body">
+    				<h4 class="media-heading">{{this.title}}</h4>
+   						 {{this.caption}}
+  				</div>
+			</div>
+
+      <div class="col-xs-6">
+		  </div>
+    
+    </div>
+
+	{{/each}}
+
+</div>
