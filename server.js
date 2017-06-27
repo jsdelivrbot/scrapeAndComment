@@ -49,7 +49,7 @@ app.use(express.static("public"));
 
 app.get("/scrape", function(req, res){
 
-	db.articles.remove({});
+	Article.remove({});
 
 	//make request to site which will be scaped
 	request("http://digg.com/", function(err, response, html){
@@ -63,8 +63,6 @@ app.get("/scrape", function(req, res){
 
 
 				var result = {};
-
-	 			result.image = $(this).find("img").attr("src");
 
 	 			result.title = $(element).find("a.digg-story__title-link").text();
 

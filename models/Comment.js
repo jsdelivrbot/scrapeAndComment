@@ -3,6 +3,10 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 CommentSchema = new Schema({
+	title:{
+		type: String,
+		required:true
+	},
 
 	body:{
 		type: String,
