@@ -6,7 +6,7 @@ This app will allow the user to scrubb digg.com for news stories. The title and 
 [you can visit the app at here an example](https://scrub-and-comment-hw.herokuapp.com/)
 
 
-###Technologies Used
+### Technologies Used
 * MongoDB
 * Mongoose
 * Cheerio
