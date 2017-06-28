@@ -160,6 +160,22 @@ app.get("/index", function(req, res){
 
 });
 
+
+
+app.delete("/comments/:id", function(req, res){
+
+	Comment.remove({"_id": req.params.id}, function(err, doc){
+		if(err){
+			console.log("collection couldnt be removed " + err);
+			return;
+		}else{
+			console.log("collection deleted");
+		}
+	});
+})
+
+
+
 app.get("/articles/:articleId",function(req,res){
 
 	Article.find({"_id": req.params.articleId}).populate("comment").exec(

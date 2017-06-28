@@ -11,19 +11,11 @@ CommentSchema = new Schema({
 	body:{
 		type: String,
 		required:true
-	},
-	display:{
-		type: Boolean,
-		default: true
 	}
 });
 
 
-CommentSchema.methods.hide = function(){
-	this.display = false;
 
-	return this.display;
-};
 
 
 var Comment = mongoose.model("Comment", CommentSchema);
