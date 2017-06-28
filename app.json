@@ -1,0 +1,8 @@
+{
+  "name": "Scrape and Comment",
+  "description": "Scrape a website and leave a comment",
+  "repository": "https://github.com/Patrickae/scrapeAndComment",
+  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+  "keywords": ["node", "express", "heroku"],
+  "image": "heroku/nodejs"
+}

@@ -139,7 +139,7 @@ app.post("/articles/:articleId",function(req,res){
 
 
 //diaplay the handlebars page
-app.get("/index", function(req, res){
+app.get("/", function(req, res){
 
 	//find all and render in handlebars
 		Article.find({}).populate("comment").exec(
