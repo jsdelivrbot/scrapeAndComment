@@ -91,7 +91,7 @@ app.get("/scrape", function(req, res){
 });
 
 //display all as a json object
-app.get("/results",function(req,res){
+app.get("/articles",function(req,res){
 
 	Article.find({}, function(err, result){
 		if (err){
@@ -105,18 +105,43 @@ app.get("/results",function(req,res){
 
 
 
+
+app.post("/articles/:articleId",function(req,res){
+
+	newComment = new Comment(req.body);
+
+	newComment.save(function(err, result){
+
+		Article.findOneAndUpdate({"_id": req.params.articleId}, {$push:{"comment": result._id}}, {new:true} ,function(err, doc){
+			if (err){
+				res.send(err)
+			}else{
+				res.send(doc)
+			}
+		});
+
+	});
+});
+
+
+
+
+
+
 //diaplay the handlebars page
 app.get("/index", function(req, res){
 
 	//find all and render in handlebars
-	Article.find({}, function(err, result){
+		Article.find({}).populate("comment").exec(
+		function(err, doc){
 		if (err){
 			res.send(err);
 		}
 		else{
 			
 			var hbsObject = {
-				entry: result
+				entry: doc,
+				comments: this.entry.comment
 			};
 
 			res.render("index", hbsObject);
@@ -124,7 +149,19 @@ app.get("/index", function(req, res){
 	});
 
 
-})
+});
+
+app.get("/articles/:articleId",function(req,res){
+
+	Article.find({"_id": req.params.articleId}).populate("comment").exec(
+		function(err, doc){
+			if (err){
+				res.send(err)
+			}else{
+				res.send(doc)
+			}
+		});
+});
 
 
 

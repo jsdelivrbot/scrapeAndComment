@@ -7,36 +7,74 @@
 <div class="container">
 
 	{{#each entry}}
-		<div class="row">
+  <div class="row">
 
 
-			<div class="panel panel-default">
-        <div class="panel-heading">{{this.title}}</div>
-        <div class="panel-body">
+   <div class="panel panel-default">
+    <div class="panel-heading">{{this.title}}</div>
+    <div class="panel-body">
 
-         <a href="{{this.link}}" target="_blank"> {{this.caption}}</a>
+     <a href="{{this.link}}" target="_blank"> {{this.caption}}</a>
 
-         <br/>
+     <br/>
 
-         <button type="button" class="btn btn-success writeCommentBtn" data-toggle="modal" data-target="#reviewModal" id="{{this._id}}">
-          Leave a review
-        </button>
+     <button type="button" class="btn btn-success writeCommentBtn" data-toggle="modal" data-target="#reviewModal" id="{{this._id}}">
+      Leave a review
+    </button>
 
 
-        <button type="button" class="btn btn-warning writeCommentBtn" data-toggle="modal" data-target="#viewComments" id="{{this._id}}">
-          See comments
-        </button>
+    <button type="button" class="btn btn-warning viewCommentBtn" data-toggle="modal" data-target="#{{this._id}}-modal" id="{{this._id}}-comments">
+      See comments
+    </button>
 
-        </div>
-      </div>
-    
-    </div>
+  </div>
+</div>
 
-	{{/each}}
+</div>
+{{/each}}
+
+
+
+
+
+
 
 
 </div>
 
+{{!-- Modal for each article --}}
+{{#each entry}}
+<div class="modal fade" id="{{this._id}}-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">View Comments</h4>
+      </div>
+      <div class="modal-body">
+
+      {{#each comment}}
+        
+        <div class="panel panel-default">
+          <div class="panel-heading">{{this.title}}</div>
+          <div class="panel-body">
+            {{this.body}}
+          </div>
+      {{/each}}
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{{/each}}
 
 
 
@@ -51,36 +89,33 @@
         <h4 class="modal-title" id="myModalLabel">Leave a Comment</h4>
       </div>
       <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+
+        <form>
+         <div class="form-group">
+           <label for="title">Title</label>
+           <input type="text" class="form-control" id="title" placeholder="Title">
+         </div>
+         <div class="form-group">
+          <label for="comment">Comment</label>
+          <textarea type="text" rows= "3" class="form-control" id="comment" placeholder="Comment"></textarea>
+        </div>
+      </form>
+
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary" id="submitComment">Save changes</button>
     </div>
   </div>
+</div>
 </div>
 
 
 
 
 
-<div class="modal fade" id="viewComments" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">View Comments</h4>
-      </div>
-      <div class="modal-body">
-        This modal dispplays the comments
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 
