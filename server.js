@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 //database config with mongoose
-mongoose.connect("mongodb://localhost/homeworkdb");
+mongoose.connect("mongodb://andyepatrick:aepster4@ds028310.mlab.com:28310/homeworkdb");
 var db = mongoose.connection;
 
 db.on("error", function(error){

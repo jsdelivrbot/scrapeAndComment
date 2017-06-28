@@ -36,7 +36,7 @@ $("#submitComment").on("click", function(){
 
 //receive comments
 $(".viewCommentBtn").on("click", function(){
-	
+
 	$("#commentsBody").empty();
 	event.preventDefault();	
 	//save the artile id
@@ -85,16 +85,16 @@ function showComments(articleId){
 
 				console.log(comments[i]);
 				//display each comment in a panel
-				if(comments[i].display === true){
+				
 
-					var commentDiv = '<div class="panel panel-default">';
-					commentDiv+='<div class="panel-heading" id="reviewHeading">'+comments[i].title;
-					commentDiv+='<button class="btn btn-danger deleteButton" id='+comments[i]._id+'>X</button></div>';
-					commentDiv+='<div class="panel-body" id="reviewBody">'+comments[i].body+'</div>';
+				var commentDiv = '<div class="panel panel-default">';
+				commentDiv+='<div class="panel-heading" id="reviewHeading">'+comments[i].title;
+				commentDiv+='<button class="btn btn-danger deleteButton" id='+comments[i]._id+'>X</button></div>';
+				commentDiv+='<div class="panel-body" id="reviewBody">'+comments[i].body+'</div>';
 
-					//place comments in the modal
-					$("#commentsBody").append(commentDiv);
-				};
+				//place comments in the modal
+				$("#commentsBody").append(commentDiv);
+				
 			};
 		};	
 		
