@@ -2,6 +2,8 @@
   <h1>Welcome to Digg Scraper</h1>
 
   <p>See articles from Digg and make comments</p>
+
+  <a href="/scrape"><button class="btn btn-primary">Scrape Digg</button></a>
 </div>
 
 <div class="container">
@@ -17,13 +19,14 @@
      <a href="{{this.link}}" target="_blank"> {{this.caption}}</a>
 
      <br/>
+     <br/>
 
-     <button type="button" class="btn btn-success writeCommentBtn" data-toggle="modal" data-target="#reviewModal" id="{{this._id}}">
+     <button type="button" class="btn btn-success writeCommentBtn" data-toggle="modal" data-target="#reviewModal" data-id="{{this._id}}">
       Leave a review
     </button>
 
 
-    <button type="button" class="btn btn-warning viewCommentBtn" data-toggle="modal" data-target="#{{this._id}}-modal" id="{{this._id}}-comments">
+    <button type="button" class="btn btn-warning viewCommentBtn" data-toggle="modal" data-target="#viewCommentsModal" data-id ="{{this._id}}">
       See comments
     </button>
 
@@ -42,9 +45,43 @@
 
 </div>
 
+
+
+  {{!-- Review modal --}}
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="CommentLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="CommentLabel">Write a Review</h4>
+      </div>
+      <div class="modal-body">
+
+          <form>
+           <div class="form-group">
+             <label for="title">Title</label>
+             <input type="text" class="form-control" id="title" placeholder="Title">
+           </div>
+           <div class="form-group">
+            <label for="comment">Comment</label>
+            <textarea type="text" rows= "3" class="form-control" id="comment" placeholder="Comment"></textarea>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="submitComment">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 {{!-- Modal for each article --}}
-{{#each entry}}
-<div class="modal fade" id="{{this._id}}-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+<div class="modal fade" id="viewCommentsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -53,69 +90,21 @@
       </div>
       <div class="modal-body">
 
-      {{#each comment}}
-        
+
+      <div id="commentsBody">
+
         <div class="panel panel-default">
-          <div class="panel-heading">{{this.title}}</div>
-          <div class="panel-body">
-            {{this.body}}
+          <div class="panel-heading" id="reviewHeading"></div>
+          <div class="panel-body" if="reviewBody">
+
           </div>
-      {{/each}}
-
-
+        </div>
 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
   </div>
-
-
-{{/each}}
-
-
-
-
-
-
-<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Leave a Comment</h4>
-      </div>
-      <div class="modal-body">
-
-        <form>
-         <div class="form-group">
-           <label for="title">Title</label>
-           <input type="text" class="form-control" id="title" placeholder="Title">
-         </div>
-         <div class="form-group">
-          <label for="comment">Comment</label>
-          <textarea type="text" rows= "3" class="form-control" id="comment" placeholder="Comment"></textarea>
-        </div>
-      </form>
-
-
-
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary" id="submitComment">Save changes</button>
-    </div>
-  </div>
-</div>
-</div>
-
-
-
-
-
-
-
 

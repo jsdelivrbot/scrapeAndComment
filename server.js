@@ -49,14 +49,19 @@ app.use(express.static("public"));
 
 app.get("/scrape", function(req, res){
 
-	Article.remove({});
+	Article.remove({}, function(err, doc){
+		if(err){
+			console.log("collection couldnt be removed " + err);
+			return;
+		}else{
+			console.log("collection deleted");
+		}
+	});
 
 	//make request to site which will be scaped
 	request("http://digg.com/", function(err, response, html){
 		//load the html into cheerio and save % as a shorthand selector
 		var $ = cheerio.load(html);
-
-		
 
 		//pick out pices of each element and assign them as key value pairs in the result object
 		$("article").each(function(i, element){
@@ -87,8 +92,13 @@ app.get("/scrape", function(req, res){
 	 		
 		});	   
 	});
-	res.send("Digg has been scraped");
+
+
+			res.render("scrape");
+	
 });
+
+
 
 //display all as a json object
 app.get("/articles",function(req,res){
@@ -105,7 +115,7 @@ app.get("/articles",function(req,res){
 
 
 
-
+//save new comments and link to correct article
 app.post("/articles/:articleId",function(req,res){
 
 	newComment = new Comment(req.body);
@@ -140,13 +150,12 @@ app.get("/index", function(req, res){
 		else{
 			
 			var hbsObject = {
-				entry: doc,
-				comments: this.entry.comment
+				entry: doc
 			};
 
 			res.render("index", hbsObject);
-		};
-	});
+			};
+		});
 
 
 });

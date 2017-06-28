@@ -19,8 +19,10 @@ CommentSchema = new Schema({
 });
 
 
-CommentSchema.method.hide = function(){
+CommentSchema.methods.hide = function(){
 	this.display = false;
+
+	return this.display;
 };
 
 
