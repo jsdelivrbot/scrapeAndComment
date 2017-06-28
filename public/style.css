@@ -1,4 +1,9 @@
-img.img{
-	height: 150px;
+body {
+	background-color:#225A53;
+}
+
+.jumbotron{
+	background-color: #263149;
+	color: white;
 }
 
