@@ -47,6 +47,7 @@ app.set("view engine", "handlebars");
 // Make public a static dir
 app.use(express.static("public"));
 
+
 app.get("/scrape", function(req, res){
 
 	Article.remove({}, function(err, doc){
@@ -88,14 +89,33 @@ app.get("/scrape", function(req, res){
 	 				else{
 	 					console.log(doc);
 	 				}
-	 			});
-	 		
-		});	   
-	});
+	 			})
+	 		// 	.then(function(){
 
 
-			res.render("scrape");
+				// 	Article.find({}).populate("comment").exec(
+				// 		function(err, doc){
+				// 			if (err){
+				// 				res.send(err);
+				// 			}
+				// 			else{
+								
+				// 				var hbsObject = {
+				// 					entry: doc
+				// 				};
+
+				// 			res.render("index", hbsObject);
+				// 			};
+				// 		});
+				// });
 	
+	 		
+			});	
+			res.render("scrape");   
+
+		});
+	
+
 });
 
 
